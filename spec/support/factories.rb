@@ -6,4 +6,9 @@ FactoryBot.define do
     url { 'http://localhost:3000/api/v1/categories/1' }
   end
 
+  factory :article do 
+    title { 'Sed pretium rhoncus nibh a rhoncus.' }
+    active { true }
+    category_id { 1 }
+  end
 end
