@@ -37,7 +37,6 @@ RSpec.describe Article, type: :model do
         page = Page.new(content: 'Sed pretium rhoncus nibh a rhoncus. Proin hendrerit tellus', article_id: 3)
         expect(page).to_not be_valid
       end
-
     end
 
 
@@ -50,15 +49,14 @@ RSpec.describe Article, type: :model do
       before { FactoryBot.create(:page, content: 'Sed pretium rhoncus nibh a rhonhendrerit tellus', article_id: 2)}
       it { expect(subject).to be_valid }
     end
-
   end
 
   describe 'attribution' do
     context 'number of pages' do
       before { @page = FactoryBot.create(:page, content: 'Sed pretium rhoncus nibh a rhoncus. Proin hendrerit tellus', article_id: 1)}
       it { expect(@page[:number].present?).to be true }
+      it { expect(@page[:number]).to eq(1) }
     end
-
   end
 
 end
