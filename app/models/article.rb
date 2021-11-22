@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :category
-  has_one :page
+  has_one :page, dependent: :destroy
   
   attr_readonly :published_at
   
