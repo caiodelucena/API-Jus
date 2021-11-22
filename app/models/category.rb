@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  has_many :articles
+  has_many :articles, dependent: :destroy
 
   before_save :set_url
 

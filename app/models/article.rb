@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :category
+  has_one :page
   
   attr_readonly :published_at
   
