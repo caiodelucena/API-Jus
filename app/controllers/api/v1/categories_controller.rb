@@ -8,7 +8,7 @@ module Api
       end 
       
       def show 
-        render json: @category
+        render json: @category.articles
       end
 
       def create
