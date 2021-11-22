@@ -11,4 +11,10 @@ FactoryBot.define do
     active { true }
     category_id { 1 }
   end
+
+  factory :page do
+    number { 1 }
+    content { 'Sed pretium rhoncus nibh a rhoncus. Proin hendrerit tellus' }
+    article_id { 1 }
+  end
 end
