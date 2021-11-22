@@ -1,7 +1,8 @@
 module Api
   module V1
     class PagesController < ApplicationController
-      before_action :set_pages, only: [:show, :update, :destroy]
+      before_action :set_pages, only: [:update, :destroy]
+      before_action :set_page_show, only: [:show]
 
       def show
         render json: @page
@@ -34,6 +35,14 @@ module Api
       end
 
       private
+
+      def set_page_show
+        @page = Page.find_by(article_id: params[:id])
+
+        @characterSpecial = @page.content.slice(0..7999).count("\n")
+        @page_content = @page
+        @page_content[:content] = @page.content.slice(0..(7999 - @characterSpecial))
+      end
 
       def set_pages
         @page = Page.find_by(article_id: params[:id])
