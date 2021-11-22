@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Articles', type: :request do
+  before do
+    FactoryBot.create(:category, name: 'Tecnologia', url: 'http://localhost:3000/api/v1/categories/1')
+  end
+
   describe 'GET index' do
     context 'when there are no articles' do
       it 'returns an empty list' do
@@ -118,6 +122,19 @@ RSpec.describe 'Articles', type: :request do
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
       
+    end
+
+    context 'published_at can not be changed' do
+      before { @article_published_at = FactoryBot.create(:article, title: 'Phasellus maximus elementum diam quis mollis.', active: false, category_id: 1)}
+      it 'update' do
+        patch '/api/v1/articles/1', params: {
+          article: {
+            published_at: '20/12/2020 21:45'
+            }
+          }
+        @article_published_at.reload
+        expect(@article_published_at[:published_at]).to_not eq('20/12/2020 21:45')
+      end
     end
 
     context 'with invalid parameters' do
